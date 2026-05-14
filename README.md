@@ -23,6 +23,12 @@ every version cut.
 brew install CarveAI/tap/bridge
 ```
 
+> ⚠️ **Always include the `CarveAI/tap/` namespace.** There's an
+> unrelated `bridge` cask on the main Homebrew tap (Epic Games' Bridge
+> launcher). Running `brew install bridge` without the namespace will
+> install that instead. If you've already done that by accident:
+> `brew uninstall --cask bridge` and try again with the full namespace.
+
 ### Linux
 
 ```sh
