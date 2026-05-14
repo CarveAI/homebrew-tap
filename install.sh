@@ -23,7 +23,17 @@
 set -eu
 
 VERSION="${VERSION:-latest}"
-RELEASE_BASE="${CARVEAI_RELEASE_BASE:-https://github.com/CarveAI/homebrew-tap/releases/download}"
+# Pointer to the *releases page* (not /download). Path under it differs
+# between "latest" (uses /latest/download/<asset>) and a specific tag
+# (uses /download/<tag>/<asset>) per GitHub's URL conventions.
+RELEASES_BASE="${CARVEAI_RELEASES_BASE:-https://github.com/CarveAI/homebrew-tap/releases}"
+# Legacy override: CARVEAI_RELEASE_BASE pointed at /releases/download/
+# in pre-v0.1.4 installers; keep accepting it if someone sets it
+# explicitly in CI/dev. Strip a trailing /download segment so the rest
+# of the script's URL templating works the new way.
+if [ -n "${CARVEAI_RELEASE_BASE:-}" ]; then
+    RELEASES_BASE="${CARVEAI_RELEASE_BASE%/download}"
+fi
 BIN_DIR=""
 
 while [ $# -gt 0 ]; do
@@ -88,9 +98,14 @@ mkdir -p "$BIN_DIR"
 # --- Resolve URL ----------------------------------------------------------
 
 if [ "$VERSION" = "latest" ]; then
-    url="${RELEASE_BASE}/latest/${asset}"
+    # GitHub's "latest release" alias has the version segment BEFORE
+    # the /download/ path: .../releases/latest/download/<asset>.
+    # NOT .../releases/download/latest/... — that 404s (no release is
+    # literally tagged 'latest').
+    url="${RELEASES_BASE}/latest/download/${asset}"
 else
-    url="${RELEASE_BASE}/${VERSION}/${asset}"
+    # Specific tag: .../releases/download/<tag>/<asset>.
+    url="${RELEASES_BASE}/download/${VERSION}/${asset}"
 fi
 
 printf 'Installing carveai-bridge\n'
