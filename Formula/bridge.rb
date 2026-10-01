@@ -17,28 +17,28 @@
 class Bridge < Formula
   desc "CarveAI desktop file-access daemon (read + write local files for hosted agents)"
   homepage "https://carveai.com"
-  version "0.7.0"
+  version "0.7.1"
   license "MIT"
 
   on_macos do
     on_arm do
       url "https://github.com/CarveAI/homebrew-tap/releases/download/v#{version}/carveai-bridge-darwin-arm64"
-      sha256 "3daab703e277142175dcb8972d723d5ac5c8f0fbec4f75d96d3314b5677d14db"
+      sha256 "299e8ebacbc1f796ce3cdeb993dad0ea6357f320f372e49e2189a2318de14a2d"
     end
     on_intel do
       url "https://github.com/CarveAI/homebrew-tap/releases/download/v#{version}/carveai-bridge-darwin-amd64"
-      sha256 "29c54a413fed182591a85d4e69bb5f6900e5f8b09dc8d67eb26d516ad24e909d"
+      sha256 "9e6eab4646ba399df2bd85cdb4a76d064d6cc412b42499e7551dbb06ce675601"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/CarveAI/homebrew-tap/releases/download/v#{version}/carveai-bridge-linux-arm64"
-      sha256 "76ab53dbbd5969364364ddc0a70e5d1a2936415ccff224837dde1d7a38348bd4"
+      sha256 "be089ab479880eb9b6463d52de6036be6ab604cf5be04f514a15cd65a038dadd"
     end
     on_intel do
       url "https://github.com/CarveAI/homebrew-tap/releases/download/v#{version}/carveai-bridge-linux-amd64"
-      sha256 "cc3888c7a86929d0ad83779f00b30903578b84856bc05994a007cb2a3ba96a26"
+      sha256 "685b03e0233cd838423b13e144923495b19bf8415c70008f27b0f032773ea7d8"
     end
   end
 
